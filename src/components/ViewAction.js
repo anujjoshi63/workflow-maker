@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ViewAction = () => {
-	return <div>create action</div>;
+	return <div>Action Viewer</div>;
 };
 
 export default ViewAction;

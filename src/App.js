@@ -1,31 +1,9 @@
 import React from 'react';
-import {
-	BrowserRouter as Router,
-	Switch,
-	Route,
-	useHistory
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './components/Home';
 import Header from './components/Header';
 import ViewAction from './components/ViewAction';
 import CreateAction from './components/CreateAction';
-// import button from material-ui
-import Button from '@mui/material/Button';
-
-const Home = () => {
-	const history = useHistory();
-	const handleCreateAction = () => {
-		history.push('/create');
-	};
-	const handleViewAction = () => {
-		history.push('/view');
-	};
-	return (
-		<>
-			<Button onClick={handleCreateAction}> Create Action</Button>
-			<Button onClick={handleViewAction}> View Actions</Button>
-		</>
-	);
-};
 
 const App = () => {
 	return (
@@ -48,4 +26,4 @@ const App = () => {
 	);
 };
 
-export default App;
+export default React.memo(App);
