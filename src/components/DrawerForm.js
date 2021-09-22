@@ -62,14 +62,26 @@ const DrawerForm = () => {
 			type: 'add_data',
 			payload: {
 				id: String(storeData.length + 1),
-				data: { label: data.label },
+				data: {
+					label: (
+						<>
+							{data.label} - {actionType}
+							<br />
+							{data.triggerDate.toString()}
+						</>
+					)
+				},
+				actionDetails: {
+					...data,
+					actionType
+				},
+
 				position: { x: 50, y: (storeData.length + 1) * 100 },
 				style: {
 					background: '#fff',
-					width: 400,
+					width: 200,
 					color: '#454052',
-					fontSize: '25px',
-					fontFamily: 'Helvetica',
+					fontSize: '1rem',
 					boxShadow: '5px 5px 5px 0px rgba(0,0,0,.10)'
 				}
 			}
