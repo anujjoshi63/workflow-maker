@@ -29,6 +29,7 @@ const DrawerForm = () => {
 		const dummyData = { ...data, [e.target.name]: e.target.value };
 		setData({ ...data, [e.target.name]: e.target.value });
 		if (
+			dummyData?.triggerDate !== '' &&
 			dummyData?.label.length &&
 			((dummyData?.to?.length &&
 				dummyData?.from?.length &&
@@ -53,7 +54,7 @@ const DrawerForm = () => {
 			location: '',
 			reminder: '',
 			label: '',
-			triggerDate: new Date()
+			triggerDate: ''
 		});
 	};
 
@@ -63,17 +64,14 @@ const DrawerForm = () => {
 			payload: {
 				id: String(storeData.length + 1),
 				data: {
-					label: (
-						<>
-							{data.label} - {actionType}
-							<br />
-							{data.triggerDate.toString()}
-						</>
-					)
-				},
-				actionDetails: {
-					...data,
-					actionType
+					label: `${data.label} - ${actionType}\n${new Date(
+						data?.triggerDate
+					)?.toLocaleDateString()}`,
+					actionDetails: {
+						...data,
+						actionType,
+						id: String(storeData.length + 1)
+					}
 				},
 
 				position: { x: 50, y: (storeData.length + 1) * 100 },
@@ -102,12 +100,16 @@ const DrawerForm = () => {
 
 	return (
 		<>
+			<Button variant="outlined" onClick={() => history.push('/view')}>
+				Go back
+			</Button>
+			<span style={{ marginLeft: 30, marginTop: 40 }}>Select Action Type</span>
 			<Select
 				id="action-type"
 				value={actionType}
 				label="Action Type"
 				onChange={handleActionChange}
-				style={{ margin: '40px 40px 10px 40px', width: '300px' }}
+				style={{ margin: '10px 40px 10px 40px', width: '300px' }}
 				variant="filled"
 			>
 				<MenuItem value={''} selected>
@@ -126,13 +128,17 @@ const DrawerForm = () => {
 						name="label"
 						type="text"
 						placeholder="Action Name"
+						variant="outlined"
 						onChange={handleDataChange}
 					/>
 					<TextField
+						variant="outlined"
 						style={{ margin: '10px 40px' }}
-						name={'triggerDate'}
+						name="triggerDate"
+						value={data.triggerDate}
 						type="datetime-local"
 						placeholder={'triggerDate'}
+						onChange={handleDataChange}
 					/>
 				</>
 			)}
@@ -144,6 +150,7 @@ const DrawerForm = () => {
 				[]
 			).map((text, index) => (
 				<TextField
+					variant="outlined"
 					key={text}
 					style={{ margin: '10px 40px' }}
 					name={text}
@@ -158,6 +165,7 @@ const DrawerForm = () => {
 				onClick={handleSubmit}
 				disabled={disableSubmit}
 				variant="outlined"
+				style={{ margin: ' 40px', color: disableSubmit ? 'silver' : '#454052' }}
 			>
 				Create Action
 			</Button>
