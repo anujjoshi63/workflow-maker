@@ -3,16 +3,16 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '@mui/material';
 const Home = () => {
 	const history = useHistory();
-	const handleCreateAction = () => {
+	const handleGotoCreate = () => {
 		history.push('/create');
 	};
-	const handleViewAction = () => {
+	const handleGotoView = () => {
 		history.push('/view');
 	};
 	return (
 		<>
-			<Button onClick={handleCreateAction}> Create Action</Button>
-			<Button onClick={handleViewAction}> View Actions</Button>
+			<Button onClick={handleGotoCreate}> Create Action</Button>
+			<Button onClick={handleGotoView}> View Actions</Button>
 		</>
 	);
 };

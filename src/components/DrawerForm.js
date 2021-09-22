@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Select, MenuItem, Divider } from '@mui/material';
-const DrawerForm = ({ setDrawerOpen }) => {
+const DrawerForm = ({ setDrawerOpen, setElements }) => {
 	// handlers
 	const [actionType, setActionType] = useState('');
 	const [disableSubmit, setDisableSubmit] = useState(true);
@@ -42,6 +42,15 @@ const DrawerForm = ({ setDrawerOpen }) => {
 		});
 	};
 	const handleSubmit = e => {
+		setElements(old => [
+			...old,
+			{
+				id: String(old.length + 1),
+				data: { label: 'ssup' },
+				position: { x: 100, y: 200 }
+			}
+		]);
+
 		console.log(data);
 		setDrawerOpen(false);
 	};
@@ -74,6 +83,15 @@ const DrawerForm = ({ setDrawerOpen }) => {
 			</Select>
 			<Divider />
 
+			<TextField
+				style={{ margin: '10px 40px' }}
+				name="actionName"
+				type="text"
+				placeholder="Action Name"
+				onChange={() => {
+					alert(1);
+				}}
+			/>
 			<TextField
 				style={{ margin: '10px 40px' }}
 				name={'triggerDate'}
